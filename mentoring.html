@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Mentoring | GMMN e.V.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#1a7a6e;--teal-dk:#135c53;--teal-lt:#e8f5f3;--teal-xlt:#f0faf9;--gold:#c9933a;--gold-lt:#fdf3e3;--ink:#1c1f23;--muted:#5a6370;--border:#dce3e1;--white:#fff;--bg:#f7faf9;--r:12px;--shadow:0 4px 32px rgba(26,122,110,.12);--trans:all .3s cubic-bezier(.4,0,.2,1)}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.7;overflow-x:hidden}
+#cursor-glow{position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(26,122,110,.06) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:0;top:0;left:0}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;transition:var(--trans)}
+nav.scrolled{background:rgba(255,255,255,.97);backdrop-filter:blur(16px);box-shadow:0 2px 24px rgba(0,0,0,.07);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.nav-logo-badge{width:38px;height:38px;border-radius:10px;background:var(--teal);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;transition:var(--trans)}
+.nav-logo:hover .nav-logo-badge{transform:rotate(-5deg) scale(1.1)}
+.nav-logo-text{font-size:.78rem;font-weight:500;line-height:1.3;max-width:200px;color:var(--muted)}
+.nav-links{display:flex;gap:26px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:.875rem;font-weight:500;transition:color .2s;position:relative;padding-bottom:2px}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--teal);border-radius:2px;transition:width .3s ease}
+.nav-links a:hover,.nav-links a.active{color:var(--teal)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-ctas{display:flex;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:.55rem 1.3rem;border-radius:8px;font-size:.875rem;font-weight:600;text-decoration:none;transition:var(--trans);cursor:pointer;border:none;position:relative;overflow:hidden}
+.btn-ghost{background:transparent;color:var(--teal);border:1.5px solid var(--teal)}
+.btn-ghost:hover{background:var(--teal-lt);transform:translateY(-1px)}
+.btn-solid{background:var(--teal);color:#fff}
+.btn-solid:hover{background:var(--teal-dk);transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,122,110,.35)}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:#b07d2a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,147,58,.35)}
+.btn-outline-white{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55)}
+.btn-outline-white:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
+.btn-lg{padding:.75rem 1.8rem;font-size:.95rem}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.reveal-left.visible{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.reveal-right.visible{opacity:1;transform:none}
+[data-delay="1"]{transition-delay:.1s}[data-delay="2"]{transition-delay:.2s}[data-delay="3"]{transition-delay:.3s}[data-delay="4"]{transition-delay:.4s}
+section{padding:96px 5%}
+.container{max-width:1160px;margin:0 auto}
+.section-eyebrow{font-size:.76rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:.75rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.7rem);font-weight:700;color:var(--ink);line-height:1.22}
+.section-subtitle{font-size:1.02rem;color:var(--muted);margin-top:.8rem;max-width:620px}
+.section-header{margin-bottom:3.5rem}
+.section-header.center{text-align:center}
+.section-header.center .section-subtitle{margin:.8rem auto 0}
+.page-hero{margin-top:68px;background:linear-gradient(135deg,var(--teal-dk) 0%,var(--teal) 55%,#2a9d8f 100%);padding:80px 5% 90px;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")}
+.page-hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto}
+.page-hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);color:rgba(255,255,255,.9);font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.1rem;border-radius:100px;margin-bottom:1.4rem;animation:fadeDown .8s ease both}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3.6rem);font-weight:700;color:#fff;line-height:1.2;margin-bottom:1.2rem;animation:fadeUp .9s .1s ease both}
+.page-hero p{font-size:1.05rem;color:rgba(255,255,255,.82);animation:fadeUp .9s .2s ease both}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem;font-size:.8rem;animation:fadeDown .8s ease both}
+.breadcrumb a{color:rgba(255,255,255,.65);text-decoration:none;transition:color .2s}
+.breadcrumb a:hover{color:#fff}
+.breadcrumb span{color:rgba(255,255,255,.4)}
+.breadcrumb .current{color:rgba(255,255,255,.9);font-weight:600}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:2rem;transition:var(--trans)}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--teal)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.tag{display:inline-block;background:var(--teal-lt);color:var(--teal);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .75rem;border-radius:100px}
+.tag-gold{background:var(--gold-lt);color:var(--gold)}
+.divider{height:1px;background:var(--border);margin:3rem 0}
+.check{width:20px;height:20px;border-radius:50%;background:var(--teal-lt);color:var(--teal);display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;flex-shrink:0;margin-top:3px}
+.stars{color:var(--gold);font-size:.85rem;letter-spacing:2px;margin-bottom:.5rem}
+.testimonial-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:2rem;transition:var(--trans);position:relative}
+.testimonial-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--teal)}
+.testimonial-card::before{content:'\201C';font-family:'Playfair Display',serif;font-size:5rem;color:var(--teal-lt);line-height:.6;position:absolute;top:1.2rem;left:1.5rem;pointer-events:none}
+.testimonial-quote{font-size:.95rem;color:var(--ink);line-height:1.75;margin-bottom:1.5rem;padding-top:1.5rem;font-style:italic}
+.testimonial-author .name{font-weight:700;font-size:.9rem;color:var(--ink)}
+.testimonial-author .role{font-size:.82rem;color:var(--muted);margin-top:.2rem}
+.cta-banner{background:linear-gradient(135deg,var(--teal-dk),var(--teal));padding:80px 5%;text-align:center;position:relative;overflow:hidden}
+.cta-banner::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")}
+.cta-banner h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.9rem);color:#fff;font-weight:700;margin-bottom:1rem;position:relative}
+.cta-banner p{color:rgba(255,255,255,.78);font-size:1.05rem;max-width:560px;margin:0 auto 2.5rem;position:relative}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
+footer{background:var(--ink);color:rgba(255,255,255,.6);padding:72px 5% 36px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand p{font-size:.87rem;color:rgba(255,255,255,.48);margin-top:1rem;line-height:1.75;max-width:280px}
+.footer-col h4{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:1rem}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:.6rem}
+.footer-col ul li a,.footer-col ul li span{color:rgba(255,255,255,.55);text-decoration:none;font-size:.87rem;transition:color .2s}
+.footer-col ul li a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{font-size:.8rem;color:rgba(255,255,255,.3)}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));z-index:300;width:0%;transition:width .1s linear}
+#back-top{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(12px);transition:var(--trans);z-index:150;box-shadow:0 4px 16px rgba(26,122,110,.4)}
+#back-top.show{opacity:1;transform:none}
+#back-top:hover{background:var(--teal-dk);transform:translateY(-3px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:transparent;border:none;z-index:210}
+.hamburger span{width:24px;height:2px;background:var(--ink);border-radius:2px;transition:var(--trans);display:block}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{position:fixed;top:68px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);padding:1.5rem 5%;z-index:190;transform:translateY(-10px);opacity:0;pointer-events:none;transition:var(--trans)}
+.mobile-menu.open{transform:none;opacity:1;pointer-events:auto}
+.mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:0}
+.mobile-menu ul li a{display:block;padding:.75rem 0;color:var(--muted);text-decoration:none;font-weight:500;border-bottom:1px solid var(--border);font-size:.95rem;transition:color .2s}
+.mobile-menu ul li a:hover{color:var(--teal)}
+.mobile-menu .mobile-ctas{display:flex;gap:10px;margin-top:1.5rem}
+@media(max-width:1024px){.nav-links{display:none}.grid-4{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr;gap:2rem}}
+@media(max-width:768px){.hamburger{display:flex}.nav-ctas{display:none}.grid-2,.grid-3{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr;gap:2rem}section{padding:64px 5%}}
+@media(max-width:480px){.cta-btns{flex-direction:column;align-items:center}}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="cursor-glow"></div>
+<nav id="navbar" class="scrolled">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-badge">G</div>
+    <span class="nav-logo-text">GMMN e.V. · Muslimische Mediziner · Norddeutschland</span>
+  </a>
+  <ul class="nav-links"><li><a href="ueber-uns.html">Über uns</a></li><li><a href="veranstaltungen.html">Veranstaltungen</a></li><li><a href="mentoring.html" class="active">Mentoring</a></li><li><a href="partnerschaft.html">Partnerschaft</a></li><li><a href="jugendforum.html">Jugendforum</a></li><li><a href="humanitaere-hilfe.html">Humanitäre Hilfe</a></li><li><a href="literaturbank.html">Literaturbank</a></li><li><a href="kontakt.html">Kontakt</a></li></ul>
+  <div class="nav-ctas">
+    <a href="kontakt.html" class="btn btn-ghost">Kontakt</a>
+    <a href="mentoring.html" class="btn btn-solid">Mitglied werden</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <ul><li><a href="ueber-uns.html">Über uns</a></li><li><a href="veranstaltungen.html">Veranstaltungen</a></li><li><a href="mentoring.html">Mentoring</a></li><li><a href="partnerschaft.html">Partnerschaft</a></li><li><a href="jugendforum.html">Jugendforum</a></li><li><a href="humanitaere-hilfe.html">Humanitäre Hilfe</a></li><li><a href="literaturbank.html">Literaturbank</a></li><li><a href="kontakt.html">Kontakt</a></li></ul>
+  <div class="mobile-ctas">
+    <a href="kontakt.html" class="btn btn-ghost" style="flex:1">Kontakt</a>
+    <a href="mentoring.html" class="btn btn-solid" style="flex:1">Mitglied werden</a>
+  </div>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Startseite</a><span>›</span><span class="current">Mentoring</span></div>
+    <div class="page-hero-eyebrow">Strukturiert · Langfristig · Wirkungsvoll</div>
+    <h1>Mentoring-Programm</h1>
+    <p>Karrierebegleitung, die wirklich etwas verändert — von erfahrenen Klinikern für Studierende und Berufseinsteiger.</p>
+  </div>
+</div>
+
+<section style="background:#fff">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start">
+      <div class="reveal-left">
+        <div class="section-eyebrow">Das Programm</div>
+        <h2 class="section-title">Begleitung auf jedem Schritt deines Weges</h2>
+        <p class="section-subtitle">Unser Mentoringprogramm verbindet Medizinstudierende und Berufseinsteiger mit erfahrenen Klinikern für strukturierte, langfristige Begleitung.</p>
+        <div style="margin-top:2rem;display:flex;flex-direction:column;gap:1rem">
+          <div style="display:flex;gap:1rem;align-items:flex-start">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--teal-lt);color:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">1</div>
+            <div><strong style="color:var(--ink)">Bewerbung einreichen</strong><br><span style="font-size:.88rem;color:var(--muted)">Kurzes Formular mit Karriereziel und Fachbereich. Jederzeit möglich.</span></div>
+          </div>
+          <div style="display:flex;gap:1rem;align-items:flex-start">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--teal-lt);color:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">2</div>
+            <div><strong style="color:var(--ink)">Match erhalten</strong><br><span style="font-size:.88rem;color:var(--muted)">Wir gleichen dein Profil mit einem passenden Mentor ab — i.d.R. innerhalb von 2–3 Wochen.</span></div>
+          </div>
+          <div style="display:flex;gap:1rem;align-items:flex-start">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--teal-lt);color:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">3</div>
+            <div><strong style="color:var(--ink)">Regelmäßige Treffen</strong><br><span style="font-size:.88rem;color:var(--muted)">Monatliche 1:1-Gespräche — persönlich, per Video oder telefonisch. 12 Monate Laufzeit.</span></div>
+          </div>
+          <div style="display:flex;gap:1rem;align-items:flex-start">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--teal-lt);color:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0">4</div>
+            <div><strong style="color:var(--ink)">Ziele erreichen</strong><br><span style="font-size:.88rem;color:var(--muted)">Prüfungen, Bewerbungen, Forschungsprojekte — dein Mentor begleitet dich konkret.</span></div>
+          </div>
+        </div>
+        <a href="kontakt.html" class="btn btn-gold btn-lg" style="margin-top:2rem">Jetzt Mentoring beantragen</a>
+      </div>
+      <div class="reveal-right">
+        <div style="border-radius:20px;background:var(--gold-lt);border:1px solid #e8d5b0;padding:3rem;text-align:center;margin-bottom:1.5rem">
+          <div style="font-family:'Playfair Display',serif;font-size:5rem;font-weight:900;color:var(--gold);line-height:1">120+</div>
+          <p style="font-size:1rem;color:var(--muted);margin-top:.5rem">Erfolgreiche Mentoring-Matches seit Gründung</p>
+        </div>
+        <div class="card" style="margin-bottom:1rem">
+          <div class="stars">★★★★★</div>
+          <p style="font-size:.9rem;color:var(--ink);font-style:italic;margin-bottom:1rem">"Mein Mentor hat mir geholfen, meinen Facharztantrag durchzudenken — und war immer erreichbar. Das hat wirklich den Unterschied gemacht."</p>
+          <div style="font-weight:700;font-size:.85rem;color:var(--ink)">Dr. Aisha R.</div>
+          <div style="font-size:.8rem;color:var(--muted)">Assistenzärztin Kardiologie, UKE Hamburg</div>
+        </div>
+        <div class="card">
+          <div class="stars">★★★★★</div>
+          <p style="font-size:.9rem;color:var(--ink);font-style:italic;margin-bottom:1rem">"Ich wusste nicht, wie ich in Deutschland ins Forschungssystem einsteigen soll. Mein Mentor hat das in 3 Gesprächen klar gemacht."</p>
+          <div style="font-weight:700;font-size:.85rem;color:var(--ink)">Yusuf K.</div>
+          <div style="font-size:.8rem;color:var(--muted)">Medizinstudent, Universität Lübeck</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg)">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-eyebrow">Schwerpunkte</div>
+      <h2 class="section-title">Wobei wir dich begleiten</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal" data-delay="1"><div style="font-size:1.8rem;margin-bottom:.75rem">📋</div><h3 style="font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.5rem">Karriereplanung</h3><p style="font-size:.88rem;color:var(--muted)">Facharzt, Forschung, oder Niederlassung — gemeinsam den richtigen Weg finden.</p></div>
+      <div class="card reveal" data-delay="2"><div style="font-size:1.8rem;margin-bottom:.75rem">📝</div><h3 style="font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.5rem">Bewerbungen</h3><p style="font-size:.88rem;color:var(--muted)">Lebenslauf, Motivationsschreiben und Vorbereitung auf Vorstellungsgespräche.</p></div>
+      <div class="card reveal" data-delay="3"><div style="font-size:1.8rem;margin-bottom:.75rem">🔬</div><h3 style="font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.5rem">Forschungseinstieg</h3><p style="font-size:.88rem;color:var(--muted)">Erste Publikation, Studiendesign und akademische Netzwerke aufbauen.</p></div>
+      <div class="card reveal" data-delay="1"><div style="font-size:1.8rem;margin-bottom:.75rem">📖</div><h3 style="font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.5rem">Prüfungsvorbereitung</h3><p style="font-size:.88rem;color:var(--muted)">Staatsexamen, Facharztprüfung und USMLE — mit Erfahrungswissen von oben.</p></div>
+      <div class="card reveal" data-delay="2"><div style="font-size:1.8rem;margin-bottom:.75rem">🌍</div><h3 style="font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.5rem">Internationaler Hintergrund</h3><p style="font-size:.88rem;color:var(--muted)">Approbation, Anerkennung ausländischer Abschlüsse und Integration ins System.</p></div>
+      <div class="card reveal" data-delay="3"><div style="font-size:1.8rem;margin-bottom:.75rem">⚖️</div><h3 style="font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.5rem">Persönliche Entwicklung</h3><p style="font-size:.88rem;color:var(--muted)">Resilienz, Work-Life-Balance und Identität als muslimischer Arzt in Deutschland.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="cta-banner">
+  <h2 class="reveal">Teil von etwas Bedeutungsvollem sein.</h2>
+  <p class="reveal" data-delay="1">Werde Teil einer Gemeinschaft, die die Zukunft der Medizin in Norddeutschland mit Wissen, Integrität und Einsatz gestaltet.</p>
+  <div class="cta-btns reveal" data-delay="2">
+    <a href="mentoring.html" class="btn btn-solid btn-lg" style="background:#fff;color:var(--teal)">GMMN beitreten</a>
+    <a href="kontakt.html" class="btn btn-outline-white btn-lg">Kontakt aufnehmen</a>
+  </div>
+</section>
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:.75rem">
+          <div class="nav-logo-badge">G</div>
+          <span style="font-size:.78rem;font-weight:500;color:rgba(255,255,255,.45)">GMMN e.V.</span>
+        </a>
+        <p>Muslimische Mediziner in Norddeutschland durch Bildung, Mentoring, Forschung und humanitären Dienst stärken.</p>
+      </div>
+      <div class="footer-col"><h4>Erkunden</h4><ul>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="veranstaltungen.html">Veranstaltungen</a></li>
+        <li><a href="mentoring.html">Mentoring</a></li>
+        <li><a href="partnerschaft.html">Partnerschaft</a></li>
+        <li><a href="jugendforum.html">Jugendforum</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Ressourcen</h4><ul>
+        <li><a href="literaturbank.html">Literaturbank</a></li>
+        <li><a href="humanitaere-hilfe.html">Humanitäre Hilfe</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Kontakt</h4><ul>
+        <li><span>Hamburg, Norddeutschland</span></li>
+        <li><a href="mailto:info@gmmn.de">info@gmmn.de</a></li>
+        <li><span>+49 (0) 40 000 0000</span></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© Gesellschaft Muslimischer Mediziner in Norddeutschland (GMMN e.V.). Alle Rechte vorbehalten.</p>
+      <p>Für Wirkung gestaltet. Mit Vertrauen gebaut.</p>
+    </div>
+  </div>
+</footer>
+<button id="back-top" aria-label="Nach oben">↑</button>
+<script>
+const revealObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>revealObs.observe(el));
+const glow=document.getElementById('cursor-glow');
+document.addEventListener('mousemove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});
+const nav=document.getElementById('navbar');
+const bar=document.getElementById('progress-bar');
+const backTop=document.getElementById('back-top');
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,d=document.body.scrollHeight-window.innerHeight;
+  bar.style.width=(s/d*100)+'%';
+  nav.classList.toggle('scrolled',s>30);
+  backTop.classList.toggle('show',s>400);
+},{passive:true});
+backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+const ham=document.getElementById('hamburger');
+const mob=document.getElementById('mobile-menu');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open')});
+mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('open');mob.classList.remove('open')}));
+document.querySelectorAll('.pillar-card,.card-tilt').forEach(card=>{
+  card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;card.style.transform=`translateY(-6px) rotateX(${-y*8}deg) rotateY(${x*8}deg)`});
+  card.addEventListener('mouseleave',()=>{card.style.transform=''});
+});
+</script>
+</body>
+</html>
